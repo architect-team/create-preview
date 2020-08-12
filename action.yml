@@ -1,5 +1,9 @@
 name: Architect Create Environment
 description: Easily register and deploy a component to the Architect Cloud
+author: architect-team
+branding:
+  icon: upload-cloud
+  color: green
 
 inputs:
   ARCHITECT_USERNAME:
