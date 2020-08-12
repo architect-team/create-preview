@@ -32,12 +32,10 @@ runs:
       shell: bash
     - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
       shell: bash
-    - run: ls -la ./
-      shell: bash
     - run: architect register ./architect.yml -t ${{ inputs.ARCHITECT_ENVIRONMENT }}
       shell: bash
       # TODO: keep using same name for tag and environment
     - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
       shell: bash
-    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ryan-cahill-a0/hello-world${{ inputs.ARCHITECT_ENVIRONMENT }}
+    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ryan-cahill-a0/hello-world:${{ inputs.ARCHITECT_ENVIRONMENT }}
       shell: bash
