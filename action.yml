@@ -14,28 +14,28 @@ inputs:
     required: true
   ARCHITECT_ENVIRONMENT: # TODO: allow a user to specify the architect.yml filename
     required: true # TODO: change to optional, default to unique name for PR
-  # ARCHITECT_ENVIRONMENT_CONFIG_NAME: # TODO: remove in place of interfaces and params string
-  #   required: true
   ARCHITECT_PLATFORM:
     required: true
+  COMPONENT_NAME:
+    required: true
+  DEPLOY_FLAGS:
+    required: false
 
 # TODO: pass in param and interface string
 # deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
-# TODO: env config optional
+# TODO: keep using same name for tag and environment
 
 runs:
   using: 'composite'
   steps:
-    - run: npm install -g @architect-io/cli
-      shell: bash
-    - run: architect version
+    - run: npm install -g @architect-io/cli@0.6.1
       shell: bash
     - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
       shell: bash
-    - run: architect register ./architect.yml -t ${{ inputs.ARCHITECT_ENVIRONMENT }}
+    - run: architect register ./architect.yml -t ${{ inputs.ARCHITECT_ENVIRONMENT }} # TODO: optional/configurable name
       shell: bash
-      # TODO: keep using same name for tag and environment
     - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
       shell: bash
-    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ryan-cahill-a0/hello-world:${{ inputs.ARCHITECT_ENVIRONMENT }}
+    - run: # pull component name from architect.yml
+    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ COMPONENT_NAME }}:${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ inputs.DEPLOY_FLAGS }}
       shell: bash
