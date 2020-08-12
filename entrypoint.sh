@@ -2,14 +2,14 @@
 
 echo TESTING CREATE ACTION
 echo $GITHUB_WORKSPACE
-$GITHUB_WORKSPACE ls -la
+# $GITHUB_WORKSPACE ls -la
 
-architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
+architect login -u $INPUT_ARCHITECT_USERNAME -p $INPUT_ARCHITECT_PASSWORD
 
-architect register --tag $ARCHITECT_ENVIRONMENT_NAME ./architect.yml
+architect register --tag $INPUT_ARCHITECT_ENVIRONMENT_NAME ./architect.yml
 
-architect environment:create $ARCHITECT_ENVIRONMENT_NAME -a $ARCHITECT_ACCOUNT --platform $ARCHITECT_PLATFORM
+architect environment:create $INPUT_ARCHITECT_ENVIRONMENT_NAME -a $INPUT_ARCHITECT_ACCOUNT --platform $INPUT_ARCHITECT_PLATFORM
 
-echo $ARCHITECT_ENVIRONMENT_CONFIG > environment.yml
+echo $INPUT_ARCHITECT_ENVIRONMENT_CONFIG > environment.yml
 
-architect deploy --auto_approve -a $ARCHITECT_ACCOUNT -e $ARCHITECT_ENVIRONMENT_NAME environment.yml
+architect deploy --auto_approve -a $INPUT_ARCHITECT_ACCOUNT -e $INPUT_ARCHITECT_ENVIRONMENT_NAME environment.yml
