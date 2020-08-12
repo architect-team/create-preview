@@ -1,23 +1,23 @@
-# name: Architect Create Environment
-# description: Easily register and deploy a component to the Architect Cloud
-# author: architect-team
-# branding:
-#   icon: upload-cloud
-#   color: green
+name: Architect Create Environment
+description: Easily register and deploy a component to the Architect Cloud
+author: architect-team
+branding:
+  icon: upload-cloud
+  color: green
 
-# inputs:
-#   ARCHITECT_USERNAME:
-#     required: true
-#   ARCHITECT_PASSWORD:
-#     required: true
-#   ARCHITECT_ACCOUNT:
-#     required: true
-#   ARCHITECT_ENVIRONMENT_NAME: # TODO: allow a user to specify the architect.yml filename
-#     required: true # TODO: change to optional, default to unique name for PR
-#   ARCHITECT_ENVIRONMENT_CONFIG: # TODO: remove in place of interfaces and params string
-#     required: true
-#   ARCHITECT_PLATFORM:
-#     required: true
+inputs:
+  ARCHITECT_USERNAME:
+    required: true
+  ARCHITECT_PASSWORD:
+    required: true
+  ARCHITECT_ACCOUNT:
+    required: true
+  ARCHITECT_ENVIRONMENT_NAME: # TODO: allow a user to specify the architect.yml filename
+    required: true # TODO: change to optional, default to unique name for PR
+  ARCHITECT_ENVIRONMENT_CONFIG: # TODO: remove in place of interfaces and params string
+    required: true
+  ARCHITECT_PLATFORM:
+    required: true
 
 # # TODO: pass in param and interface string
 # # deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
@@ -33,19 +33,14 @@
 #     - ${{ inputs.ARCHITECT_ENVIRONMENT_CONFIG }} # TODO: config optional
 #     - ${{ inputs.ARCHITECT_PLATFORM }}
 
-name: 'Hello Architect World'
-description: 'Greet someone'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - run: uname -orv
       shell: bash
-    - run: apt update && apt install -y docker node npm
-      shell: bash
     - run: npm install -g @architect-io/cli
+      shell: bash
+    - run: architect version
+      shell: bash
+    - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
       shell: bash
