@@ -7,9 +7,11 @@ inputs:
     required: true
   ARCHITECT_ACCOUNT:
     required: true
-  ARCHITECT_PLATFORM:
+  ARCHITECT_ENVIRONMENT_NAME:
     required: true
   ARCHITECT_ENVIRONMENT_CONFIG:
+    required: true
+  ARCHITECT_PLATFORM:
     required: true
 
 runs:
@@ -19,5 +21,6 @@ runs:
     - ${{ inputs.ARCHITECT_USERNAME }}
     - ${{ inputs.ARCHITECT_PASSWORD }}
     - ${{ inputs.ARCHITECT_ACCOUNT }}
-    - ${{ inputs.ARCHITECT_PLATFORM }}
+    - ${{ inputs.ARCHITECT_ENVIRONMENT_NAME }}
     - ${{ inputs.ARCHITECT_ENVIRONMENT_CONFIG }}
+    - ${{ inputs.ARCHITECT_PLATFORM }}
