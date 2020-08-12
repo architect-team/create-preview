@@ -45,7 +45,7 @@ runs:
   steps:
     - run: uname -orv
       shell: bash
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - run: apt update && apt install -y docker node npm
       shell: bash
-    - run: echo "Nice to meet you!"
-      shell: pwsh
+    - run: npm install -g @architect-io/cli
+      shell: bash
