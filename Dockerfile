@@ -1,4 +1,4 @@
-FROM node-alpine:12.18.3
+FROM node:12-alpine
 
 RUN npm install -g @architect-io/cli && architect version
 
