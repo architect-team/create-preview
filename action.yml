@@ -12,35 +12,32 @@ inputs:
     required: true
   ARCHITECT_ACCOUNT:
     required: true
-  ARCHITECT_ENVIRONMENT_NAME: # TODO: allow a user to specify the architect.yml filename
+  ARCHITECT_ENVIRONMENT: # TODO: allow a user to specify the architect.yml filename
     required: true # TODO: change to optional, default to unique name for PR
-  ARCHITECT_ENVIRONMENT_CONFIG: # TODO: remove in place of interfaces and params string
-    required: true
+  # ARCHITECT_ENVIRONMENT_CONFIG_NAME: # TODO: remove in place of interfaces and params string
+  #   required: true
   ARCHITECT_PLATFORM:
     required: true
 
-# # TODO: pass in param and interface string
-# # deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
-
-# runs:
-#   using: 'docker'
-#   image: 'Dockerfile'
-#   args:
-#     - ${{ inputs.ARCHITECT_USERNAME }}
-#     - ${{ inputs.ARCHITECT_PASSWORD }}
-#     - ${{ inputs.ARCHITECT_ACCOUNT }}
-#     - ${{ inputs.ARCHITECT_ENVIRONMENT_NAME }}
-#     - ${{ inputs.ARCHITECT_ENVIRONMENT_CONFIG }} # TODO: config optional
-#     - ${{ inputs.ARCHITECT_PLATFORM }}
+# TODO: pass in param and interface string
+# deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
+# TODO: env config optional
 
 runs:
   using: 'composite'
   steps:
-    - run: uname -orv
-      shell: bash
     - run: npm install -g @architect-io/cli
       shell: bash
     - run: architect version
       shell: bash
     - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
+      shell: bash
+    - run: ls -la ./
+      shell: bash
+    - run: architect register -t ${{ inputs.ARCHITECT_ENVIRONMENT_NAME }} ./architect.yml
+      shell: bash
+      # TODO: keep using same name for tag and environment
+    - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT_NAME }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
+      shell: bash
+    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT_NAME }} ryan-cahill-a0/hello-world${{ inputs.ARCHITECT_ENVIRONMENT_NAME }}
       shell: bash
