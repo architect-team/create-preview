@@ -2,7 +2,9 @@
 
 echo TESTING CREATE ACTION
 echo $GITHUB_WORKSPACE
+pwd
 ls -la ./
+cat README.md
 
 architect login -u $INPUT_ARCHITECT_USERNAME -p $INPUT_ARCHITECT_PASSWORD
 # TODO: echo steps
