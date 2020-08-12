@@ -3,8 +3,8 @@ FROM node-alpine:12.18.3
 RUN npm install -g @architect-io/cli && architect version
 
 RUN echo TESTING CREATE ACTION
-RUN $GITHUB_WORKSPACE
-RUN $GITHUB_WORKSPACE ls -la
+RUN echo $GITHUB_WORKSPACE
+RUN echo $GITHUB_WORKSPACE ls -la
 
 RUN architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
 
