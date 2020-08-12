@@ -33,7 +33,7 @@
 #     - ${{ inputs.ARCHITECT_ENVIRONMENT_CONFIG }} # TODO: config optional
 #     - ${{ inputs.ARCHITECT_PLATFORM }}
 
-name: 'Hello World'
+name: 'Hello Architect World'
 description: 'Greet someone'
 inputs:
   who-to-greet:  # id of input
