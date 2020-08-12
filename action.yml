@@ -36,6 +36,5 @@ runs:
       shell: bash
     - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
       shell: bash
-    - run: # pull component name from architect.yml
     - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ COMPONENT_NAME }}:${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ inputs.DEPLOY_FLAGS }}
       shell: bash
