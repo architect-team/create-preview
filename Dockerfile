@@ -6,7 +6,7 @@ RUN npm install -g @architect-io/cli && architect version
 
 RUN echo TESTING CREATE ACTION
 RUN echo $GITHUB_WORKSPACE
-RUN echo $GITHUB_WORKSPACE ls -la
+RUN $GITHUB_WORKSPACE ls -la
 
 RUN architect login -u $ARCHITECT_USERNAME -p $ARCHITECT_PASSWORD
 
