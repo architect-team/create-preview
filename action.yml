@@ -20,6 +20,9 @@ inputs:
     required: true
   DEPLOY_FLAGS:
     required: false
+  COMPONENT_FILE:
+    required: false
+    default: ./architect.yml
 
 # TODO: pass in param and interface string
 # deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
@@ -32,7 +35,7 @@ runs:
       shell: bash
     - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
       shell: bash
-    - run: architect register ./architect.yml -t ${{ inputs.ARCHITECT_ENVIRONMENT }} # TODO: optional/configurable name
+    - run: architect register ${{ inputs.COMPONENT_FILE }} -t ${{ inputs.ARCHITECT_ENVIRONMENT }}
       shell: bash
     - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
       shell: bash
