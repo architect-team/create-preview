@@ -1,4 +1,5 @@
 name: Architect Create Environment
+description: Easily register and deploy a component to the Architect Cloud
 
 inputs:
   ARCHITECT_USERNAME:
