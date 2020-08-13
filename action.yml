@@ -1,5 +1,5 @@
-name: Architect Create Environment
-description: Easily register and deploy a component to the Architect Cloud
+name: Create Preview
+description: Easily register and deploy a component to a new environment on the Architect Cloud
 author: architect-team
 branding:
   icon: upload-cloud
@@ -12,7 +12,7 @@ inputs:
     required: true
   ACCOUNT:
     required: true
-  ENVIRONMENT: # TODO: use build/run id as default and make optional?
+  ENVIRONMENT:
     required: true
   PLATFORM:
     required: true
