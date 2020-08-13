@@ -6,34 +6,34 @@ branding:
   color: green
 
 inputs:
-  USERNAME:
+  username:
     required: true
-  PASSWORD:
+  password:
     required: true
-  ACCOUNT:
+  account:
     required: true
-  ENVIRONMENT:
+  environment:
     required: true
-  PLATFORM:
+  platform:
     required: true
-  COMPONENT_NAME: # TODO: use jq/yq and read from file?
+  component_name: # TODO: use jq/yq and read from file?
     required: true
-  DEPLOY_FLAGS:
-    required: false
-  COMPONENT_FILE:
+  component_file:
     required: false
     default: ./architect.yml
+  deploy_flags:
+    required: false
 
 runs:
   using: 'composite'
   steps:
     - run: npm install -g @architect-io/cli@0.6.1
       shell: bash
-    - run: architect login -u ${{ inputs.USERNAME }} -p ${{ inputs.PASSWORD }}
+    - run: architect login -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash
-    - run: architect register ${{ inputs.COMPONENT_FILE }} -t ${{ inputs.ENVIRONMENT }}
+    - run: architect register ${{ inputs.component_file }} -t ${{ inputs.environment }}
       shell: bash
-    - run: architect environment:create ${{ inputs.ENVIRONMENT }} -a ${{ inputs.ACCOUNT }} --platform ${{ inputs.PLATFORM }}
+    - run: architect environment:create ${{ inputs.environment }} -a ${{ inputs.account }} --platform ${{ inputs.platform }}
       shell: bash
-    - run: architect deploy --auto_approve -a ${{ inputs.ACCOUNT }} -e ${{ inputs.ENVIRONMENT }} ${{ inputs.COMPONENT_NAME }}:${{ inputs.ENVIRONMENT }} ${{ inputs.DEPLOY_FLAGS }}
+    - run: architect deploy --auto_approve -a ${{ inputs.account }} -e ${{ inputs.environment }} ${{ inputs.component_name }}:${{ inputs.environment }} ${{ inputs.deploy_flags }}
       shell: bash
