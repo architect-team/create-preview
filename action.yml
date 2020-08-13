@@ -6,17 +6,17 @@ branding:
   color: green
 
 inputs:
-  ARCHITECT_USERNAME:
+  USERNAME:
     required: true
-  ARCHITECT_PASSWORD:
+  PASSWORD:
     required: true
-  ARCHITECT_ACCOUNT:
+  ACCOUNT:
     required: true
-  ARCHITECT_ENVIRONMENT: # TODO: allow a user to specify the architect.yml filename
-    required: true # TODO: change to optional, default to unique name for PR
-  ARCHITECT_PLATFORM:
+  ENVIRONMENT: # TODO: use build/run id as default and make optional?
     required: true
-  COMPONENT_NAME:
+  PLATFORM:
+    required: true
+  COMPONENT_NAME: # TODO: use jq/yq and read from file?
     required: true
   DEPLOY_FLAGS:
     required: false
@@ -24,20 +24,16 @@ inputs:
     required: false
     default: ./architect.yml
 
-# TODO: pass in param and interface string
-# deploy component name with tag that we assign, same name as the environment (tag should be the same as the env name by default)
-# TODO: keep using same name for tag and environment
-
 runs:
   using: 'composite'
   steps:
     - run: npm install -g @architect-io/cli@0.6.1
       shell: bash
-    - run: architect login -u ${{ inputs.ARCHITECT_USERNAME }} -p ${{ inputs.ARCHITECT_PASSWORD }}
+    - run: architect login -u ${{ inputs.USERNAME }} -p ${{ inputs.PASSWORD }}
       shell: bash
-    - run: architect register ${{ inputs.COMPONENT_FILE }} -t ${{ inputs.ARCHITECT_ENVIRONMENT }}
+    - run: architect register ${{ inputs.COMPONENT_FILE }} -t ${{ inputs.ENVIRONMENT }}
       shell: bash
-    - run: architect environment:create ${{ inputs.ARCHITECT_ENVIRONMENT }} -a ${{ inputs.ARCHITECT_ACCOUNT }} --platform ${{ inputs.ARCHITECT_PLATFORM }}
+    - run: architect environment:create ${{ inputs.ENVIRONMENT }} -a ${{ inputs.ACCOUNT }} --platform ${{ inputs.PLATFORM }}
       shell: bash
-    - run: architect deploy --auto_approve -a ${{ inputs.ARCHITECT_ACCOUNT }} -e ${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ inputs.COMPONENT_NAME }}:${{ inputs.ARCHITECT_ENVIRONMENT }} ${{ inputs.DEPLOY_FLAGS }}
+    - run: architect deploy --auto_approve -a ${{ inputs.ACCOUNT }} -e ${{ inputs.ENVIRONMENT }} ${{ inputs.COMPONENT_NAME }}:${{ inputs.ENVIRONMENT }} ${{ inputs.DEPLOY_FLAGS }}
       shell: bash
