@@ -2,7 +2,7 @@
 
 Easily register and deploy a component to a new preview environment on the [Architect Cloud](https://www.architect.io/).
 
-Suggestions and issues can be posted on the [issues page](https://github.com/architect-team/gh-action-architect-create-environment/issues).
+Suggestions and issues can be posted on the [issues page](https://github.com/architect-team/create-preview/issues).
 
 [Inputs](#Inputs)
 * [username](#username)
@@ -64,7 +64,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
     - name: Create Preview
-      uses: architect-team/gh-action-architect-create-environment@v1.0.0
+      uses: architect-team/create-preview@v1.0.0
       with:
         username: ${{ github.event.inputs.username }}
         password: ${{ secrets.PASSWORD }}
