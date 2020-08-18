@@ -27,7 +27,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: npm install -g @architect-io/cli@0.6.1
+    - run: npm install -g @architect-io/cli@0.6.3
       shell: bash
     - run: architect login -u ${{ inputs.username }} -p ${{ inputs.password }}
       shell: bash
