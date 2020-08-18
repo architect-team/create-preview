@@ -16,7 +16,7 @@ inputs:
     required: true
   platform:
     required: true
-  component_name: # TODO: use jq/yq and read from file?
+  component_name:
     required: true
   component_file:
     required: false
