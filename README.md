@@ -5,7 +5,7 @@ Easily register and deploy a component to a new preview environment on the [Arch
 Suggestions and issues can be posted on the [issues page](https://github.com/architect-team/create-preview/issues).
 
 [Inputs](#Inputs)
-* [username](#username)
+* [email](#email)
 * [password](#password)
 * [account](#account)
 * [environment](#environment)
@@ -16,9 +16,9 @@ Suggestions and issues can be posted on the [issues page](https://github.com/arc
 
 ## Inputs
 
-### `username`
+### `email`
 
-**Required** Username used to log in to the Architect Cloud
+**Required** Email used to log in to the Architect Cloud
 
 ### `password`
 
@@ -66,7 +66,7 @@ jobs:
     - name: Create Preview
       uses: architect-team/create-preview@v1.0.0
       with:
-        username: ${{ github.event.inputs.username }}
+        email: ${{ github.event.inputs.email }}
         password: ${{ secrets.PASSWORD }}
         account: ${{ github.event.inputs.account }}
         environment: $GITHUB_RUN_ID
